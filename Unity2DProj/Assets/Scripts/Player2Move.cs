@@ -75,5 +75,16 @@ public class Player2Move : MonoBehaviour
             Destroy(other.gameObject);
             GetComponent<AudioSource>().Play();
         }
+        if (other.gameObject.tag == "hitbox1")
+        {
+            health2 = health2 - 10;
+            Health2.text = "Health: " + health2;
+            if (health2 <= 0)
+            {
+                Health2.text = "Game over!";
+                meter2 = 0;
+                Destroy(gameObject);
+            }
+        }
     }
 }
