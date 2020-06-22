@@ -55,18 +55,6 @@ public class CharMove : MonoBehaviour
         {
             grounded = true;
         }
-
-        if (collision.gameObject.tag == "hitbox2")
-        {
-            health = health - 10;
-            Health.text = "Health: " + health;
-            if (health <= 0)
-            {
-                Health.text = "Game over!";
-                meter = 0;
-                Destroy(gameObject);
-            }
-        }
     }
     public void OnTriggerEnter(Collider other)
     {

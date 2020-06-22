@@ -52,18 +52,6 @@ public class Player2Move : MonoBehaviour
         {
             grounded = true;
         }
-
-        if (collision.gameObject.tag == "hitbox1")
-        {
-            health2 = health2 - 10;
-            Health2.text = "Health: " + health2;
-            if (health2 <= 0)
-            {
-                Health2.text = "Game over!";
-                meter2 = 0;
-                Destroy(gameObject);
-            }
-        }
     }
     public void OnTriggerEnter(Collider other)
     {
