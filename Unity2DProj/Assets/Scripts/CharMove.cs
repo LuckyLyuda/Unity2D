@@ -28,13 +28,13 @@ public class CharMove : MonoBehaviour
         Health.text = "Health: " + health;
         Meter.text = "Meter: " + meter;
     }
-    bool grounded = false;
+    
     // Update is called once per frame
     void Update()
     {
         //Movement
         float x = Input.GetAxisRaw("Horizontal");
-        if (grounded == true && Input.GetKeyDown(KeyCode.W))
+        if (isGrounded == true && Input.GetKeyDown(KeyCode.W))
         {
 
             rb.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
@@ -63,7 +63,7 @@ public class CharMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "floor")
         {
-            grounded = true;
+           isGrounded = true;
         }
     }
     public void OnTriggerEnter2D(Collider2D other)
