@@ -7,17 +7,24 @@ using UnityEngine.UI;
 
 public class CharMove : MonoBehaviour
 {
-    Rigidbody rb;
+    Rigidbody2D rb;
     public int health = 100;
     public float meter = 0f;
     public Text UIText;
     public Text Health;
     public Text Meter;
     public GameObject hitbox;
+    private Vector2 moveinput;
+    
+    
+    
+    public float jump = 0.1f;
+    public float speed = 5f;
+    public bool isGrounded;
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
         Health.text = "Health: " + health;
         Meter.text = "Meter: " + meter;
     }
@@ -25,38 +32,41 @@ public class CharMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.Translate(0.01f, 0, 0);
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            transform.Translate(-0.01f, 0, 0);
-        }
+        //Movement
+        float x = Input.GetAxisRaw("Horizontal");
         if (grounded == true && Input.GetKeyDown(KeyCode.W))
         {
-            GetComponent<Rigidbody>().velocity = new Vector3(0, 8, 0);
-            grounded = false;
+
+            rb.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
+            isGrounded = false;
         }
+        rb.velocity = new Vector2(x * speed, rb.velocity.y);
+        
+
+        //Attack
         if (meter >= 10 && Input.GetKeyDown(KeyCode.S))
         {
             Instantiate(hitbox, transform.position, transform.rotation);
             meter = meter - 10;
         }
+        
+        
         if (meter <= 100f)
         {
             meter = meter + 10 * Time.deltaTime;
             Meter.text = "Meter: " + meter;
         }
     }
-        public void OnCollisionEnter(Collision collision)
+
+    
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "floor")
         {
             grounded = true;
         }
     }
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "coin")
         {
