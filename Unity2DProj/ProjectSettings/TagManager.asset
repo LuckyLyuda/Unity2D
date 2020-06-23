@@ -12,6 +12,7 @@ TagManager:
   - hitbox2
   - Player2
   - Player1
+  - sword
   layers:
   - Default
   - TransparentFX

@@ -15,9 +15,9 @@ public class CharMove : MonoBehaviour
     public Text Meter;
     public GameObject hitbox;
     private Vector2 moveinput;
-    
-    
-    
+
+
+    public GameObject sword;
     public float jump = 0.1f;
     public float speed = 5f;
     public bool isGrounded;
@@ -42,6 +42,14 @@ public class CharMove : MonoBehaviour
         }
         rb.velocity = new Vector2(x * speed, rb.velocity.y);
         
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+
+            sword.SetActive(true);
+            GetComponent<Animation>().Play();
+            //sword.SetActive(false);
+
+        }
 
         //Attack
         if (meter >= 10 && Input.GetKeyDown(KeyCode.S))
@@ -57,8 +65,8 @@ public class CharMove : MonoBehaviour
             Meter.text = "Meter: " + meter;
         }
     }
-
     
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "floor")
