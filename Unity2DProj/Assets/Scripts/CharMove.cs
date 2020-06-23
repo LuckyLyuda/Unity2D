@@ -14,13 +14,13 @@ public class CharMove : MonoBehaviour
     public Text Health;
     public Text Meter;
     public GameObject hitbox;
-    private Vector2 moveinput;
-
-
     public GameObject sword;
+    private Vector2 moveinput;
+    
+    
+    
     public float jump = 0.1f;
     public float speed = 5f;
-    public bool isGrounded;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +28,7 @@ public class CharMove : MonoBehaviour
         Health.text = "Health: " + health;
         Meter.text = "Meter: " + meter;
     }
-    
+    bool isGrounded = false;
     // Update is called once per frame
     void Update()
     {
@@ -42,36 +42,37 @@ public class CharMove : MonoBehaviour
         }
         rb.velocity = new Vector2(x * speed, rb.velocity.y);
         
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-
-            sword.SetActive(true);
-            GetComponent<Animation>().Play();
-            //sword.SetActive(false);
-
-        }
 
         //Attack
-        if (meter >= 10 && Input.GetKeyDown(KeyCode.S))
+        if (meter >= 10 && Input.GetKeyDown(KeyCode.Q))
         {
-            Instantiate(hitbox, transform.position, transform.rotation);
+            sword.SetActive(true);
+            GetComponent<Animation>().Play("testAnim");
+            //sword.SetActive(false);
             meter = meter - 10;
         }
-        
-        
+        if (meter >= 10 && Input.GetKeyDown(KeyCode.E))
+        {
+            sword.SetActive(true);
+            GetComponent<Animation>().Play("swordright");
+            //sword.SetActive(false);
+            meter = meter - 10;
+        }
+
+
         if (meter <= 100f)
         {
             meter = meter + 10 * Time.deltaTime;
             Meter.text = "Meter: " + meter;
         }
     }
-    
 
+    
     public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "floor")
         {
-           isGrounded = true;
+            isGrounded = true;
         }
     }
     public void OnTriggerEnter2D(Collider2D other)
@@ -85,6 +86,17 @@ public class CharMove : MonoBehaviour
             GetComponent<AudioSource>().Play();
         }
         if (other.gameObject.tag == "hitbox2")
+        {
+            health = health - 10;
+            Health.text = "Health: " + health;
+            if (health <= 0)
+            {
+                Health.text = "Game over!";
+                meter = 0;
+                Destroy(gameObject);
+            }
+        }
+        if (other.gameObject.tag == "killbox")
         {
             health = health - 10;
             Health.text = "Health: " + health;
