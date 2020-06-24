@@ -20,7 +20,7 @@ public class CharMove : MonoBehaviour
 
     public int player = 0; // player 0/1 (0:arrows 1:wasd)
     private string axis;
-    public int maxMeter = 100f;
+    public float maxMeter = 100f;
     public float jump = 0.1f;
     public float speed = 5f;
     private UnityEngine.KeyCode[,] controls;
@@ -32,7 +32,7 @@ public class CharMove : MonoBehaviour
         Meter.text = "Meter: " + meter;
 
 
-        controls = new UnityEngine.KeyCode[,] { { KeyCode.W, KeyCode.UpArrow }, { KeyCode.Q, KeyCode.Keypad1 }, { KeyCode.E, KeyCode.Keypad2 }, { KeyCode.F, KeyCode.Keypad3 }, { KeyCode.Q, KeyCode.Keypad4 }, { KeyCode.E, KeyCode.Keypad5 } };
+        controls = new UnityEngine.KeyCode[,] { { KeyCode.W, KeyCode.UpArrow }, { KeyCode.Q, KeyCode.Keypad1 }, { KeyCode.E, KeyCode.Keypad2 }, { KeyCode.F, KeyCode.Keypad3 }, { KeyCode.Z, KeyCode.Keypad4 }, { KeyCode.R, KeyCode.Keypad5 } };
         
 
         /*
