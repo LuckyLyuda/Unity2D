@@ -20,7 +20,7 @@ public class CharMove : MonoBehaviour
 
     public int player = 0; // player 0/1 (0:arrows 1:wasd)
     private string axis;
-    
+    public int maxMeter = 100f;
     public float jump = 0.1f;
     public float speed = 5f;
     private UnityEngine.KeyCode[,] controls;
@@ -59,7 +59,7 @@ public class CharMove : MonoBehaviour
         float x = Input.GetAxisRaw(axis);
 
 
-        
+        string[] animations = new string[] {"testAnim", "swordright", "spinattack", "upair", "downair"};
         if (isGrounded == true && Input.GetKeyDown(controls[0, player]))
         {
 
@@ -69,43 +69,21 @@ public class CharMove : MonoBehaviour
         rb.velocity = new Vector2(x * speed, rb.velocity.y);
         
 
-        //Attack
-        if (meter >= 10 && isGrounded == true && Input.GetKeyDown(controls[1, player]))
+        for(int i = 0; i < animations.Length ; i++)
         {
-            sword.SetActive(true);
-            GetComponent<Animation>().Play("testAnim");
-            //sword.SetActive(false);
-            meter = meter - 10;
-        }
-        if (meter >= 10 && isGrounded == true && Input.GetKeyDown(controls[2,player]))
-        {
-            sword.SetActive(true);
-            GetComponent<Animation>().Play("swordright");
-            //sword.SetActive(false);
-            meter = meter - 10;
-        }
-        if (meter >= 20 &&  Input.GetKeyDown(controls[3,player]))
-        {
-            sword.SetActive(true);
-            GetComponent<Animation>().Play("spinattack");
-            //sword.SetActive(false);
-            meter = meter - 20;
-        }
-        if (meter >= 15 && isGrounded == false && Input.GetKeyDown(controls[4,player]))
-        {
-            sword.SetActive(true);
-            GetComponent<Animation>().Play("upair");
-            //sword.SetActive(false);
-            meter = meter - 15;
-        }
-        if (meter >= 15 && isGrounded == false && Input.GetKeyDown(controls[5, player]))
-        {
-            sword.SetActive(true);
-            GetComponent<Animation>().Play("downair");
-            //sword.SetActive(false);
-            meter = meter - 15;
-        }
-        if (meter <= 100f)
+            UnityEngine.Debug.Log(i);
+            if(meter >= 10 && Input.GetKeyDown(controls[i + 1, player]))
+            {
+                sword.SetActive(true);
+                GetComponent<Animation>().Play(animations[i]);
+                meter -= 10;
+            }
+        }    
+ 
+
+
+
+        if (meter <= maxMeter)
         {
             meter = meter + 10 * Time.deltaTime;
             Meter.text = "Meter: " + meter;
@@ -125,8 +103,9 @@ public class CharMove : MonoBehaviour
         if (other.gameObject.tag == "coin")
         {
             //coin disappears
-            meter = meter + 10f;
-            Meter.text = "Meter: " + meter;
+            //meter = meter + 10f;
+            //Meter.text = "Meter: " + meter;
+            maxMeter += 20;
             Destroy(other.gameObject);
             GetComponent<AudioSource>().Play();
         }
