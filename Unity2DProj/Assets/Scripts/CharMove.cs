@@ -32,7 +32,7 @@ public class CharMove : MonoBehaviour
         Meter.text = "Meter: " + meter;
 
 
-        controls = new UnityEngine.KeyCode[,] { { KeyCode.W, KeyCode.UpArrow }, { KeyCode.Q, KeyCode.Keypad1 }, { KeyCode.E, KeyCode.Keypad2 }, { KeyCode.F, KeyCode.Keypad3 }, {KeyCode.R, KeyCode.Keypad4} };
+        controls = new UnityEngine.KeyCode[,] { { KeyCode.W, KeyCode.UpArrow }, { KeyCode.Q, KeyCode.Keypad1 }, { KeyCode.E, KeyCode.Keypad2 }, { KeyCode.F, KeyCode.Keypad3 }, { KeyCode.Q, KeyCode.Keypad4 }, { KeyCode.E, KeyCode.Keypad5 } };
         
 
         /*
@@ -59,7 +59,7 @@ public class CharMove : MonoBehaviour
         float x = Input.GetAxisRaw(axis);
 
 
-        string[] animations = new string[] {"testAnim", "swordright", "spinattack", "upair"};
+        string[] animations = new string[] {"testAnim", "swordright", "spinattack", "upair", "downair"};
         if (isGrounded == true && Input.GetKeyDown(controls[0, player]))
         {
 
@@ -68,6 +68,7 @@ public class CharMove : MonoBehaviour
         }
         rb.velocity = new Vector2(x * speed, rb.velocity.y);
         
+
         for(int i = 0; i < animations.Length ; i++)
         {
             UnityEngine.Debug.Log(i);
