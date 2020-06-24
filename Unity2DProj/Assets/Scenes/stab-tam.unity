@@ -2089,8 +2089,8 @@ Transform:
   m_LocalScale: {x: 0.2375, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2014346501}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 55.341003}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!61 &1515752086
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2223,6 +2223,7 @@ Animation:
   - {fileID: 7400000, guid: 2d2ac6675e8559444a8a5561340bd0b2, type: 2}
   - {fileID: 7400000, guid: e1106904539624f42ad9d39386852eae, type: 2}
   - {fileID: 7400000, guid: 9477871f9cbad374b9d965c7178a6fc1, type: 2}
+  - {fileID: 7400000, guid: c399cbbe8b8698c4d9b6c874c25e7bae, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
