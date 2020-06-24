@@ -32,7 +32,7 @@ public class CharMove : MonoBehaviour
         Meter.text = "Meter: " + meter;
 
 
-        controls = new UnityEngine.KeyCode[,] { { KeyCode.W, KeyCode.UpArrow }, { KeyCode.Q, KeyCode.Keypad1 }, {KeyCode.E, KeyCode.Keypad2 } };
+        controls = new UnityEngine.KeyCode[,] { { KeyCode.W, KeyCode.UpArrow }, { KeyCode.Q, KeyCode.Keypad1 }, { KeyCode.E, KeyCode.Keypad2 } ,{ KeyCode.F, KeyCode.Keypad3 } };
         
 
         /*
@@ -84,7 +84,7 @@ public class CharMove : MonoBehaviour
             //sword.SetActive(false);
             meter = meter - 10;
         }
-        if (meter >= 20 && isGrounded == true && Input.GetKeyDown(KeyCode.F))
+        if (meter >= 20 &&  Input.GetKeyDown(controls[3,player]))
         {
             sword.SetActive(true);
             GetComponent<Animation>().Play("spinattack");
