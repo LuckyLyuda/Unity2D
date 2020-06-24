@@ -61,7 +61,7 @@ public class CharMove : MonoBehaviour
         if (meter >= 20 && isGrounded == true && Input.GetKeyDown(KeyCode.F))
         {
             sword.SetActive(true);
-            GetComponent<Animation>().Play("reversal");
+            GetComponent<Animation>().Play("spinattack");
             //sword.SetActive(false);
             meter = meter - 20;
         }
