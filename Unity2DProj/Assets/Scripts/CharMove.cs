@@ -44,14 +44,14 @@ public class CharMove : MonoBehaviour
         
 
         //Attack
-        if (meter >= 10 && Input.GetKeyDown(KeyCode.Q))
+        if (meter >= 10 && isGrounded == true && Input.GetKeyDown(KeyCode.Q))
         {
             sword.SetActive(true);
             GetComponent<Animation>().Play("testAnim");
             //sword.SetActive(false);
             meter = meter - 10;
         }
-        if (meter >= 10 && Input.GetKeyDown(KeyCode.E))
+        if (meter >= 10 && isGrounded == true && Input.GetKeyDown(KeyCode.E))
         {
             sword.SetActive(true);
             GetComponent<Animation>().Play("swordright");
@@ -62,6 +62,13 @@ public class CharMove : MonoBehaviour
         {
             sword.SetActive(true);
             GetComponent<Animation>().Play("spinattack");
+            //sword.SetActive(false);
+            meter = meter - 20;
+        }
+        if (meter >= 20 && isGrounded == false && Input.GetKeyDown(KeyCode.Q))
+        {
+            sword.SetActive(true);
+            GetComponent<Animation>().Play("upair");
             //sword.SetActive(false);
             meter = meter - 20;
         }
