@@ -32,7 +32,7 @@ public class CharMove : MonoBehaviour
         Meter.text = "Meter: " + meter;
 
 
-        controls = new UnityEngine.KeyCode[,] { { KeyCode.W, KeyCode.UpArrow }, { KeyCode.Q, KeyCode.Keypad1 }, { KeyCode.E, KeyCode.Keypad2 }, { KeyCode.F, KeyCode.Keypad3 }, { KeyCode.Q, KeyCode.Keypad4 } };
+        controls = new UnityEngine.KeyCode[,] { { KeyCode.W, KeyCode.UpArrow }, { KeyCode.Q, KeyCode.Keypad1 }, { KeyCode.E, KeyCode.Keypad2 }, { KeyCode.F, KeyCode.Keypad3 }, { KeyCode.Q, KeyCode.Keypad4 }, { KeyCode.E, KeyCode.Keypad5 } };
         
 
         /*
@@ -95,6 +95,13 @@ public class CharMove : MonoBehaviour
         {
             sword.SetActive(true);
             GetComponent<Animation>().Play("upair");
+            //sword.SetActive(false);
+            meter = meter - 15;
+        }
+        if (meter >= 15 && isGrounded == false && Input.GetKeyDown(controls[5, player]))
+        {
+            sword.SetActive(true);
+            GetComponent<Animation>().Play("downair");
             //sword.SetActive(false);
             meter = meter - 15;
         }

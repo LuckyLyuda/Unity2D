@@ -1261,7 +1261,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2015039407}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 165}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 315}
 --- !u!1 &1420191807
 GameObject:
   m_ObjectHideFlags: 0
@@ -2174,6 +2174,7 @@ Animation:
   - {fileID: 7400000, guid: 2d2ac6675e8559444a8a5561340bd0b2, type: 2}
   - {fileID: 7400000, guid: 9477871f9cbad374b9d965c7178a6fc1, type: 2}
   - {fileID: 7400000, guid: c399cbbe8b8698c4d9b6c874c25e7bae, type: 2}
+  - {fileID: 7400000, guid: 898c9b423110afd47be1eeb70f39935b, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -2294,7 +2295,7 @@ MonoBehaviour:
   hitbox: {fileID: 11788898}
   sword: {fileID: 1418965969}
   player: 0
-  jump: 0.1
+  jump: 7
   speed: 5
 --- !u!212 &2015039406
 SpriteRenderer:
