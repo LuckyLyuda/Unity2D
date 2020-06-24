@@ -59,7 +59,7 @@ public class CharMove : MonoBehaviour
         float x = Input.GetAxisRaw(axis);
 
 
-        
+        string[] animations = new string[] {"testAnim", "swordright", "spinattack", "upair"};
         if (isGrounded == true && Input.GetKeyDown(controls[0, player]))
         {
 
@@ -68,6 +68,17 @@ public class CharMove : MonoBehaviour
         }
         rb.velocity = new Vector2(x * speed, rb.velocity.y);
         
+        for(int i = 0; i < animations.Length ; i++)
+        {
+            UnityEngine.Debug.Log(i);
+            if(meter >= 10 && Input.GetKeyDown(controls[i + 1, player]))
+            {
+                sword.SetActive(true);
+                GetComponent<Animation>().Play(animations[i]);
+                meter -= 10;
+            }
+        }    
+        /*
 
         //Attack
         if (meter >= 10 && Input.GetKeyDown(controls[1, player]))
@@ -97,7 +108,10 @@ public class CharMove : MonoBehaviour
             GetComponent<Animation>().Play("upair");
             //sword.SetActive(false);
             meter = meter - 20;
-        }
+        }*/
+
+
+
         if (meter <= 100f)
         {
             meter = meter + 10 * Time.deltaTime;
