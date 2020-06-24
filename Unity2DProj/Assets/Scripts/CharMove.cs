@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,25 +17,50 @@ public class CharMove : MonoBehaviour
     public GameObject hitbox;
     public GameObject sword;
     private Vector2 moveinput;
-    
-    
+
+    public int player = 0; // player 0/1 (0:arrows 1:wasd)
+    private string axis;
     
     public float jump = 0.1f;
     public float speed = 5f;
+    private UnityEngine.KeyCode[,] controls;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         Health.text = "Health: " + health;
         Meter.text = "Meter: " + meter;
+
+
+        controls = new UnityEngine.KeyCode[,] { { KeyCode.W, KeyCode.UpArrow }, { KeyCode.Q, KeyCode.Keypad1 }, { KeyCode.E, KeyCode.Keypad2 } ,{ KeyCode.F, KeyCode.Keypad3 }, (KeyCode.Q, KeyCode.Keypad4 };
+        
+
+        /*
+         * player1  player2 
+         * hor      horwasd
+         * up       w
+         * q        1
+         * e        2
+         * 
+        */
+
+        if (player == 0)
+            axis = "HorizontalWASD";
+        else
+            axis = "Horizontal";
+
     }
     bool isGrounded = false;
     // Update is called once per frame
     void Update()
     {
         //Movement
-        float x = Input.GetAxisRaw("Horizontal");
-        if (isGrounded == true && Input.GetKeyDown(KeyCode.W))
+        //
+        float x = Input.GetAxisRaw(axis);
+
+
+        
+        if (isGrounded == true && Input.GetKeyDown(controls[0, player]))
         {
 
             rb.AddForce(Vector2.up * jump, ForceMode2D.Impulse);
@@ -44,28 +70,28 @@ public class CharMove : MonoBehaviour
         
 
         //Attack
-        if (meter >= 10 && isGrounded == true && Input.GetKeyDown(KeyCode.Q))
+        if (meter >= 10 && Input.GetKeyDown(controls[1, player]))
         {
             sword.SetActive(true);
             GetComponent<Animation>().Play("testAnim");
             //sword.SetActive(false);
             meter = meter - 10;
         }
-        if (meter >= 10 && isGrounded == true && Input.GetKeyDown(KeyCode.E))
+        if (meter >= 10 && Input.GetKeyDown(controls[2,player]))
         {
             sword.SetActive(true);
             GetComponent<Animation>().Play("swordright");
             //sword.SetActive(false);
             meter = meter - 10;
         }
-        if (meter >= 20 && isGrounded == true && Input.GetKeyDown(KeyCode.F))
+        if (meter >= 20 &&  Input.GetKeyDown(controls[3,player]))
         {
             sword.SetActive(true);
             GetComponent<Animation>().Play("spinattack");
             //sword.SetActive(false);
             meter = meter - 20;
         }
-        if (meter >= 20 && isGrounded == false && Input.GetKeyDown(KeyCode.Q))
+        if (meter >= 20 && isGrounded == false && Input.GetKeyDown(controls[4,player))
         {
             sword.SetActive(true);
             GetComponent<Animation>().Play("upair");
@@ -108,10 +134,13 @@ public class CharMove : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        if (other.gameObject.tag == "killbox")
+        if (other.gameObject.tag == "killbox" || other.gameObject.tag == "sword")
         {
+            //if (other.transform.parent.name.Equals(this.transform.parent.name))
+            //    return;
+
             health = health - 10;
-            Health.text = "Health: " + health;
+            Health.text = "Player " + player + " Health: " + health;
             if (health <= 0)
             {
                 Health.text = "Game over!";
@@ -120,4 +149,6 @@ public class CharMove : MonoBehaviour
             }
         }
     }
+    
+    
 }
