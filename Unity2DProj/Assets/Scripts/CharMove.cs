@@ -127,6 +127,20 @@ public class CharMove : MonoBehaviour
             //if (other.transform.parent.name.Equals(this.transform.parent.name))
             //    return;
 
+            health = health - 15;
+            Health.text = "Player " + player + " Health: " + health;
+            if (health <= 0)
+            {
+                Health.text = "Game over!";
+                meter = 0;
+                Destroy(gameObject);
+            }
+        }
+        if (other.gameObject.tag == "spear")
+        {
+            //if (other.transform.parent.name.Equals(this.transform.parent.name))
+            //    return;
+
             health = health - 10;
             Health.text = "Player " + player + " Health: " + health;
             if (health <= 0)
