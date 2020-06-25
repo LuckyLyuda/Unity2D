@@ -71,7 +71,7 @@ public class CharMove : MonoBehaviour
 
         for(int i = 0; i < animations.Length ; i++)
         {
-            UnityEngine.Debug.Log(i);
+            //UnityEngine.Debug.Log(i);
             if(meter >= 10 && Input.GetKeyDown(controls[i + 1, player]))
             {
                 sword.SetActive(true);
