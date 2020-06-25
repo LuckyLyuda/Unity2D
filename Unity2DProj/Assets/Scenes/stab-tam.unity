@@ -620,6 +620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a49d3ace688454ebbfa0a5d32a2d54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: level2
   wall: {fileID: 8848888274863092437, guid: 41c1ce998183cbc41993ad460796a0a5, type: 3}
   player1: {fileID: 3412712043701050303, guid: e8daca0a779c09841996ddbdf0ebf794, type: 3}
   player2: {fileID: 6262281537229092647, guid: b2eece7b5b9bd0c4999a615f2995aca7, type: 3}

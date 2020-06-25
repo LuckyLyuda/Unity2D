@@ -7,10 +7,15 @@ using UnityEngine;
 public class SpawnLevel : MonoBehaviour
 {
     // Start is called before the first frame update
+    public string level = "level1";
+    
+    
     public GameObject wall;
     public Transform player1;
     public Transform player2;
     public Transform floor_valid;
+
+    
     //public Transform floor_obstacle;
     //public Transform floor_checkpoint;
 
@@ -22,7 +27,7 @@ public class SpawnLevel : MonoBehaviour
 
     void Start()
     {
-        string[][] jagged = readFile("Assets/Resources/level1.txt");
+        string[][] jagged = readFile("Assets/Resources/" + level + ".txt");
         Debug.Log("test");
         Debug.Log(jagged[0][0]);
         // create planes based on matrix
