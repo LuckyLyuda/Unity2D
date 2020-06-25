@@ -25,9 +25,11 @@ public class CharMove : MonoBehaviour
     public float speed = 5f;
     private UnityEngine.KeyCode[,] controls;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        Health =  GameObject.Find("health" + (player + 1)).GetComponent<Text>();
+        Meter = GameObject.Find("meter" + (player + 1)).GetComponent<Text>();
         Health.text = "Health: " + health;
         Meter.text = "Meter: " + meter;
 
@@ -121,6 +123,20 @@ public class CharMove : MonoBehaviour
             }
         }
         if (other.gameObject.tag == "killbox" || other.gameObject.tag == "sword")
+        {
+            //if (other.transform.parent.name.Equals(this.transform.parent.name))
+            //    return;
+
+            health = health - 15;
+            Health.text = "Player " + player + " Health: " + health;
+            if (health <= 0)
+            {
+                Health.text = "Game over!";
+                meter = 0;
+                Destroy(gameObject);
+            }
+        }
+        if (other.gameObject.tag == "spear")
         {
             //if (other.transform.parent.name.Equals(this.transform.parent.name))
             //    return;
