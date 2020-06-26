@@ -18,6 +18,8 @@ public class CharMove : MonoBehaviour
     public GameObject sword;
     private Vector2 moveinput;
 
+    //public GameObject win;
+
     public int player = 0; // player 0/1 (0:arrows 1:wasd)
     private string axis;
     public float maxMeter = 100f;
@@ -109,6 +111,7 @@ public class CharMove : MonoBehaviour
             //Meter.text = "Meter: " + meter;
             maxMeter += 20;
             Destroy(other.gameObject);
+            
             GetComponent<AudioSource>().Play();
         }
         if (other.gameObject.tag == "hitbox2")
@@ -120,6 +123,7 @@ public class CharMove : MonoBehaviour
                 Health.text = "Game over!";
                 meter = 0;
                 Destroy(gameObject);
+                
             }
         }
         if (other.gameObject.tag == "killbox" || other.gameObject.tag == "sword")
@@ -127,11 +131,14 @@ public class CharMove : MonoBehaviour
             //if (other.transform.parent.name.Equals(this.transform.parent.name))
             //    return;
 
+            
+
             health = health - 15;
             Health.text = "Player " + player + " Health: " + health;
             if (health <= 0)
             {
                 Health.text = "Game over!";
+                endGame();
                 meter = 0;
                 Destroy(gameObject);
             }
@@ -146,10 +153,31 @@ public class CharMove : MonoBehaviour
             if (health <= 0)
             {
                 Health.text = "Game over!";
+                endGame();
                 meter = 0;
                 Destroy(gameObject);
             }
         }
+    }
+
+    public void endGame()
+    {
+        int winner = player == 0 ? 1 : 0;
+        try
+        {
+            GameObject x = GameObject.Find("Game Over");
+            x.transform.position = new Vector2(764, x.transform.position.y);
+
+            GameObject.Find("EndGameText").GetComponent<Text>().text = "Winner: Player " + winner;
+            //.GetComponent<Button>().GetComponentInChildren<Text>().text = 
+        }
+        catch (System.Exception)
+        {
+            throw;
+        }
+
+        
+
     }
     
     

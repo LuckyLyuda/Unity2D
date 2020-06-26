@@ -63,6 +63,11 @@ public class menu : MonoBehaviour
         controls.SetActive(false);
     }
 
+    public void ToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void SetLevel(int level)
     {
 
