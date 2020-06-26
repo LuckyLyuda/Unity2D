@@ -16,6 +16,7 @@ public class CharMove : MonoBehaviour
     public Text Meter;
     public GameObject sword;
     public GameObject bap;
+    int dirHit = 0;
     private Vector2 moveinput;
 
     public int player = 0; // player 0/1 (0:arrows 1:wasd)
@@ -77,6 +78,7 @@ public class CharMove : MonoBehaviour
             {
                 sword.SetActive(true);
                 GetComponent<Animation>().Play(animations[i]);
+                dirHit = i;
                 meter -= 10;
             }
         }    
@@ -128,13 +130,28 @@ public class CharMove : MonoBehaviour
             health = health - 15;
             Health.text = "Player " + player + " Health: " + health;
             Instantiate(bap, transform.position, Quaternion.identity);
-            float atkpos = GameObject.Find("swordsprite").transform.position.x;
-            float selfpos = GameObject.Find("Player").transform.position.x;
+            int dirHit = other.gameObject.GetComponent<CharMove>().dirHit;
             if (health <= 0)
             {
                 Health.text = "Game over!";
                 meter = 0;
                 Destroy(gameObject);
+            }
+            if (dirHit == 1)
+            {
+                rb.AddForce(Vector2.left * 2, ForceMode2D.Impulse);
+            }
+            if (dirHit == 2)
+            {
+                rb.AddForce(Vector2.up * 2, ForceMode2D.Impulse);
+            }
+            if (dirHit == 3)
+            {
+                rb.AddForce(Vector2.right * 2, ForceMode2D.Impulse);
+            }
+            if (dirHit == 4)
+            {
+                rb.AddForce(Vector2.down * 2, ForceMode2D.Impulse);
             }
         }
         if (other.gameObject.tag == "spear")
@@ -144,23 +161,28 @@ public class CharMove : MonoBehaviour
             health = health - 10;
             Health.text = "Player " + player + " Health: " + health;
             Instantiate(bap, transform.position, Quaternion.identity);
-            float atkpos = GameObject.Find("swordsprite").transform.position.x;
-            float selfpos = GameObject.Find("Player").transform.position.x;
+            int dirHit = other.gameObject.GetComponent<CharMove>().dirHit;
             if (health <= 0)
             {
                 Health.text = "Game over!";
                 meter = 0;
                 Destroy(gameObject);
             }
-            else if (atkpos > selfpos)
+            if (dirHit == 1)
             {
                 rb.AddForce(Vector2.left * 2, ForceMode2D.Impulse);
-                rb.AddForce(Vector2.up * 1, ForceMode2D.Impulse);
             }
-            else if (atkpos < selfpos)
+            if (dirHit == 2)
+            {
+                rb.AddForce(Vector2.up * 2, ForceMode2D.Impulse);
+            }
+            if (dirHit == 3)
             {
                 rb.AddForce(Vector2.right * 2, ForceMode2D.Impulse);
-                rb.AddForce(Vector2.up * 1, ForceMode2D.Impulse);
+            }
+            if (dirHit == 4)
+            {
+                rb.AddForce(Vector2.down * 2, ForceMode2D.Impulse);
             }
         }
     }
