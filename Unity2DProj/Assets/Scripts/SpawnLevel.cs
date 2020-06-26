@@ -27,7 +27,8 @@ public class SpawnLevel : MonoBehaviour
 
     void Start()
     {
-        string[][] jagged = readFile("Assets/Resources/" + level + ".txt");
+        int level = PlayerPrefs.GetInt("level") + 1;
+        string[][] jagged = readFile("Assets/Resources/level" + level + ".txt");
         Debug.Log("test");
         Debug.Log(jagged[0][0]);
         // create planes based on matrix

@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 7a2909ea49ac1914985ec268f71fcd4e
+  - enabled: 1
+    path: Assets/Scenes/stab-tam.unity
+    guid: 1f1a3b57c5f862f4bbcfa7bc4f873c9e
   m_configObjects: {}
