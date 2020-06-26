@@ -212,8 +212,8 @@ MonoBehaviour:
   UIText: {fileID: 0}
   Health: {fileID: 0}
   Meter: {fileID: 0}
-  hitbox: {fileID: 0}
   sword: {fileID: 3412712042970687425}
+  bap: {fileID: 3577415851533293351, guid: f38fb261f37038140a7894f882331ad3, type: 3}
   player: 0
   maxMeter: 100
   jump: 9

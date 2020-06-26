@@ -14,8 +14,8 @@ public class CharMove : MonoBehaviour
     public Text UIText;
     public Text Health;
     public Text Meter;
-    public GameObject hitbox;
     public GameObject sword;
+    public GameObject bap;
     private Vector2 moveinput;
 
     public int player = 0; // player 0/1 (0:arrows 1:wasd)
@@ -32,7 +32,6 @@ public class CharMove : MonoBehaviour
         Meter = GameObject.Find("meter" + (player + 1)).GetComponent<Text>();
         Health.text = "Health: " + health;
         Meter.text = "Meter: " + meter;
-
 
         controls = new UnityEngine.KeyCode[,] { { KeyCode.W, KeyCode.UpArrow }, { KeyCode.Q, KeyCode.Keypad1 }, { KeyCode.E, KeyCode.Keypad2 }, { KeyCode.F, KeyCode.Keypad3 }, { KeyCode.Z, KeyCode.Keypad4 }, { KeyCode.R, KeyCode.Keypad5 } };
         
@@ -126,9 +125,11 @@ public class CharMove : MonoBehaviour
         {
             //if (other.transform.parent.name.Equals(this.transform.parent.name))
             //    return;
-
             health = health - 15;
             Health.text = "Player " + player + " Health: " + health;
+            Instantiate(bap, transform.position, Quaternion.identity);
+            float atkpos = GameObject.Find("swordsprite").transform.position.x;
+            float selfpos = GameObject.Find("Player").transform.position.x;
             if (health <= 0)
             {
                 Health.text = "Game over!";
@@ -140,14 +141,26 @@ public class CharMove : MonoBehaviour
         {
             //if (other.transform.parent.name.Equals(this.transform.parent.name))
             //    return;
-
             health = health - 10;
             Health.text = "Player " + player + " Health: " + health;
+            Instantiate(bap, transform.position, Quaternion.identity);
+            float atkpos = GameObject.Find("swordsprite").transform.position.x;
+            float selfpos = GameObject.Find("Player").transform.position.x;
             if (health <= 0)
             {
                 Health.text = "Game over!";
                 meter = 0;
                 Destroy(gameObject);
+            }
+            else if (atkpos > selfpos)
+            {
+                rb.AddForce(Vector2.left * 2, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * 1, ForceMode2D.Impulse);
+            }
+            else if (atkpos < selfpos)
+            {
+                rb.AddForce(Vector2.right * 2, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * 1, ForceMode2D.Impulse);
             }
         }
     }
