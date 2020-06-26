@@ -14,7 +14,7 @@ public class SpawnLevel : MonoBehaviour
     public Transform player1;
     public Transform player2;
     public Transform floor_valid;
-
+    public Transform coin;
     
     //public Transform floor_obstacle;
     //public Transform floor_checkpoint;
@@ -22,6 +22,7 @@ public class SpawnLevel : MonoBehaviour
     public const string sfloor_valid = "x";
     public const string splayer1 = "1";
     public const string splayer2 = "2";
+    public const string scoin = "c";
     //public const string sfloor_checkpoint = "2";
     //public const string sstart = "S";
 
@@ -46,6 +47,9 @@ public class SpawnLevel : MonoBehaviour
                         break;
                     case splayer2:
                         Instantiate(player2, new Vector3(x, -y, 0), Quaternion.identity);
+                        break;
+                    case scoin:
+                        Instantiate(coin, new Vector3(x, -y, 0), Quaternion.identity);
                         break;
 
                 }
